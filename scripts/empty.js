@@ -11,7 +11,10 @@ fs.removeSync(paths.testDir)
 
 fs.copySync(path.join(paths.templateDir, 'test'), paths.testDir)
 fs.mkdirSync(paths.srcDir)
+fs.createFileSync(path.join(paths.srcDir, '.gitkeep'))
 fs.mkdirSync(paths.distDir)
+fs.createFileSync(path.join(paths.distDir, '.gitkeep'))
 fs.mkdirSync(paths.distTestDir)
+fs.createFileSync(path.join(paths.distTestDir, '.gitkeep'))
 
 console.log('Success !')
