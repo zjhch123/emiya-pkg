@@ -1,0 +1,24 @@
+{
+  "presets": [
+      [
+          "env",
+          {
+              "modules": false
+          }
+      ],
+      "stage-2"
+  ],
+  "plugins": [
+      "external-helpers",
+      [
+          "transform-runtime",
+          {
+              "helpers": false,
+              "polyfill": false,
+              "moduleName": "babel-runtime"
+          }
+      ],
+      "lodash"
+  ],
+  "comments": false
+}
