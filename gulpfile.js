@@ -28,7 +28,7 @@ const getPlatform = _dir => {
     })
 }
 
-const platforms = getPlatform(srcUtilTestDir)
+const platforms = getPlatform(paths.srcDir)
 
 const runPath = platforms.map(platform => ({
   platform,
@@ -76,6 +76,7 @@ gulp.task('watch', function () {
   gulp.watch([path.resolve(__dirname, 'src/**/*.html')], ['html'])
   $$.livereload.listen()
   gulp.watch(['dist/**']).on('change', $$.livereload.changed)
+  gulp.watch(['dist_test/**']).on('change', $$.livereload.changed)
 })
 
 gulp.task('server', () => {

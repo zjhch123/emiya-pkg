@@ -1,11 +1,9 @@
 const resolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
 const eslint = require('rollup-plugin-eslint').eslint
-const sass = require('rollup-plugin-sass')
 const alias = require('rollup-plugin-alias')
 const autoprefixer = require('autoprefixer')
-const postcss = require('postcss')
-const cssnano = require('cssnano')
+const postcss = require('rollup-plugin-postcss')
 const babel = require('rollup-plugin-babel')
 
 const path = require('path')
@@ -24,25 +22,15 @@ module.exports = function (_params) {
         '@src': paths.srcDir,
         '@dist': paths.distDir
       }),
-      sass({
-        insert: false,
-        output: false,
-        processor: (css) => postcss([
-            autoprefixer({
-              browsers: [
-                'last 2 versions',
-                '> 1%',
-                'ie >= 8',
-                'iOS >= 8',
-                'Android >= 4',
-              ]
-            }),
-            cssnano({
-              safe: true
-            })
-          ])
-          .process(css, { from: path.resolve(_params, '../', 'index.scss') })
-          .then(result => result.css)
+      postcss({
+        modules: true,
+        minimize: true,
+        use: [ 'sass' ],
+        plugins:  [
+          autoprefixer({
+            browsers: [ 'last 2 versions', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4' ]
+          })
+        ]
       }),
       resolve({
         module: true,
